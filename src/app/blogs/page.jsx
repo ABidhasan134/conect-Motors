@@ -1,5 +1,6 @@
 import React from 'react'
 import vlogs from '../../date.json'
+import Link from 'next/link'
 const Blogs = () => {
   const vloges = [
     {
@@ -69,7 +70,9 @@ const Blogs = () => {
             <h2 className="card-title">{vlog.title}</h2>
             <p>{vlog.description}</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Book now!</button>
+              {/* dynamic routing for every vlog */}
+              {/* we have to create folder inside the blogs folder */}
+            <Link href={`/blogs/${vlog.id}`}> <button className="btn btn-primary">Book now!</button></Link>
             </div>
           </div>
         </div>

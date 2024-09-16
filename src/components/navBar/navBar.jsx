@@ -1,4 +1,5 @@
 "use client"
+import DashBordlayout from "@/app/(dashbord)/dashbord/layout";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -29,6 +30,13 @@ const NavBar = () => {
   const handelRedirect=()=>{
     router.push("/login")
   }
+
+
+  if(pathName.includes("dashbord"))
+    return (
+  <div>
+    <DashBordlayout></DashBordlayout>
+  </div>)
   return (
     <nav className="flex fix justify-between items-center m-2">
       <h1 className="text-3xl">
