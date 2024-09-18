@@ -29,6 +29,14 @@ const NavBar = () => {
     {
       title: "Dashboard",
       path: "dashbord"
+    },
+    {
+      title: "Post",
+      path: "/post"
+    },
+    {
+      title: "mails",
+      path: "/mails"
     }
   ];
   const handelRedirect=()=>{
