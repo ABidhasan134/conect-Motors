@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 const MailsFood = () => {
   const [meails, setmeails] = useState([]);
   const [search, setSearch] = useState("");
-
+  // console.log(process.env.API_KEY_URL)
   const loadmealis = async () => {
     try {
       const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`);

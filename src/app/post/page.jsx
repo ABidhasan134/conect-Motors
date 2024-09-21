@@ -2,14 +2,16 @@ import Link from 'next/link'
 import React from 'react'
 
 export const getpost= async()=>{
-const res=await fetch('https://jsonplaceholder.typicode.com/posts')
+  // process.env.API_KEY_URL will work on node environments but not in the other if we went to 
+  // work on different environments we should add in .env file like NEXT_PUBLIC_API_KEY_URL
+const res=await fetch(`${process.env.API_KEY_URL}/posts`)
 const data=res.json()
 return data
 }
 
 const postPage = async() => {
     const postdata=await getpost()
-    // console.log(postdata)
+    // console.log("This is from the env file",process.env.API_KEY_URL)
   return (
     <div className='grid grid-cols-4 gap-6'>
       { postdata.map((post)=>{
