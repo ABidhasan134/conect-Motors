@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import NavBar from "@/components/navBar/navBar";
+import AuthProvider from "./services/authProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,12 +27,14 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased container mx-auto`}
       >
+        <AuthProvider>
         <NavBar></NavBar>
         {children}
         {/* <script src="https://cdn.tailwindcss.com"></script> */}
         <footer className="bg-sky-900">
           footer
         </footer>
+        </AuthProvider>
       </body>
     </html>
   );

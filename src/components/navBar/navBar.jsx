@@ -1,14 +1,16 @@
 "use client"
 import DashBordlayout from "@/app/(dashbord)/dashbord/layout";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import React from "react";
 
 const NavBar = () => {
+  const sessoin=useSession();
     const pathName=usePathname();
     const router=useRouter()
-    console.log(pathName)
+    console.log(sessoin)
   const links = [
     {
       title: "home",
@@ -59,7 +61,10 @@ const NavBar = () => {
             links.map((link,index)=><Link key={index} className={pathName===link.path && "text-red-600"} href={link.path}>{link.title}</Link>)
         }
       </ul>
-      <button className="btn" onClick={handelRedirect}>Log In</button>
+     {
+      !sessoin.status==="authenticated"?<button className="btn" onClick={handelRedirect}>Log In</button>:"log out"
+     } 
+     
     </nav>
   );
 };

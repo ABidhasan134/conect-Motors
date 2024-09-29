@@ -13,6 +13,7 @@ const handler = NextAuth({
       },
       async authorize(credentials) {
         if (!credentials) {
+          console.log("credentials is required")
           return null;
         }
 
@@ -21,15 +22,17 @@ const handler = NextAuth({
           const currentUser = users.find((user) => user.email === credentials.email);
 
           // Log the currentUser if found
-          console.log(currentUser);
+          console.log(credentials.email);
 
           if (currentUser) {
             // If user is found, return user
+            console.log(currentUser)
             return currentUser;
           }
         }
 
         // If no user is found, return null
+        console.log("not a valid user")
         return null;
       },
     }),
