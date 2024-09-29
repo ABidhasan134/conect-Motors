@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const handler = NextAuth({
+export const authOptions={
+  secret:process.env.NEXT_PUBLIC_AUTH_SECRET,
   session: {
     strategy: "jwt",
   },
@@ -36,18 +37,45 @@ const handler = NextAuth({
         return null;
       },
     }),
+    
   ],
-});
+  callbacks: {
+    async session({ session, user, token }) {
+      // Propagate user type to the session object
+      // console.log(session, token)
+      session.user.type = token.type; // Use token type
+      return session;
+    },
+    async jwt({ token, user }) {
+      // Persist type from user to token on login
+      // console.log(token, user)
+      if (user) {
+        token.type = user.type;
+      }
+      return token;
+    },
+  },
+}
+const handler = NextAuth(authOptions);
 
 const users = [
-  {
+  { id: 1,
     email: "ab@c.com",
+    name: "james",
+    type: "admin",
+    image: "https://usatodayhss.com/wp-content/uploads/sites/96/2022/08/11268798.jpeg?w=1000&h=600&crop=1"
   },
   {
+    id: 2,
     email: "ac@c.com",
+    name: "james",
+    type: "user"
   },
   {
-    email: "bc@c.com",
+    id: 3,
+    email: "ac@c.com",
+    name: "james",
+    type: "user"
   },
 ];
 

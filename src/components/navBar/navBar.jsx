@@ -1,16 +1,18 @@
 "use client"
 import DashBordlayout from "@/app/(dashbord)/dashbord/layout";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 import React from "react";
+import Logout from "../log/logout";
 
 const NavBar = () => {
   const sessoin=useSession();
     const pathName=usePathname();
     const router=useRouter()
-    console.log(sessoin)
+    // console.log(sessoin?.data?.user?.image)
   const links = [
     {
       title: "home",
@@ -42,7 +44,7 @@ const NavBar = () => {
     }
   ];
   const handelRedirect=()=>{
-    router.push("/login")
+    router.push("/api/auth/signin")
   }
 
 
@@ -62,7 +64,11 @@ const NavBar = () => {
         }
       </ul>
      {
-      !sessoin.status==="authenticated"?<button className="btn" onClick={handelRedirect}>Log In</button>:"log out"
+      sessoin.status==="authenticated"?<Logout>
+      </Logout>:
+      <button className="btn" onClick={handelRedirect}>Log In</button>
+      
+      
      } 
      
     </nav>
