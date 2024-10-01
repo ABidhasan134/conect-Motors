@@ -25,5 +25,4 @@ db= client.db('userDB')
   return 
 }
 
-
 export default coneectDB
