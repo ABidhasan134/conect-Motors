@@ -9,10 +9,10 @@ const MailsFood = () => {
     try {
       const res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${search}`);
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
       setmeails(data.meals || []); // if meals is null, set an empty array
     } catch (error) {
-      console.error("Failed to fetch meals", error);
+      // console.error("Failed to fetch meals", error);
     }
   };
 
@@ -20,7 +20,7 @@ const MailsFood = () => {
     e.preventDefault();
     const message = e.target.value;
     setSearch(message);
-    console.log(message);
+    // console.log(message);
   };
 
   useEffect(() => {

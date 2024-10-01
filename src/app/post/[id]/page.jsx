@@ -7,7 +7,7 @@ const getPostData= async(id)=>{
     }
 const postDiteils = async({params}) => {
     const Diteils=await getPostData(params.id)
-    console.log(Diteils)
+    // console.log(Diteils)
   return (
     <div className='border-2 p-6 m-6'>
         {params.id}

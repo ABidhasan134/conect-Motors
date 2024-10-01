@@ -1,17 +1,23 @@
+import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { NextResponse } from 'next/server'
- 
-// we can chack the 
-const user=false;
+
 export function middleware(request) {
-  const token = cookies(request).get('next-auth.session-token');
-  console.log(token);
-    if(!token){
-  return NextResponse.redirect(new URL('/api/auth/signin', request.url))
+  const token = request.cookies.get('next-auth.session-token');
+  console.log('This token is from middleware:', token);
+
+  // Redirect to login page if no token
+  if (!token) {
+    return NextResponse.redirect(new URL('/api/auth/signin', request.url));
+  }
+
+  // Example redirection for '/'
+  if (request.nextUrl.pathname === '/') {
+    return NextResponse.redirect(new URL('/home', request.url));
+  }
+
+  return NextResponse.next();
 }
- return NextResponse.next()
-}
- 
+
 export const config = {
-  matcher: ['/dashbord'],
-}
+  matcher: ['/', '/dashbord', '/blogs'],
+};

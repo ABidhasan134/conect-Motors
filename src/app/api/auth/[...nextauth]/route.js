@@ -14,7 +14,7 @@ export const authOptions={
       },
       async authorize(credentials) {
         if (!credentials) {
-          console.log("credentials is required")
+          // console.log("credentials is required")
           return null;
         }
 
@@ -23,17 +23,17 @@ export const authOptions={
           const currentUser = users.find((user) => user.email === credentials.email);
 
           // Log the currentUser if found
-          console.log(credentials.email);
+          // console.log(credentials.email);
 
           if (currentUser) {
             // If user is found, return user
-            console.log(currentUser)
+            // console.log(currentUser)
             return currentUser;
           }
         }
 
         // If no user is found, return null
-        console.log("not a valid user")
+        // console.log("not a valid user")
         return null;
       },
     }),
