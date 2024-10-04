@@ -1,23 +1,12 @@
-import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-
+import { NextResponse } from 'next/server'
+ 
+// This function can be marked `async` if using `await` inside
 export function middleware(request) {
-  const token = request.cookies.get('next-auth.session-token');
-  console.log('This token is from middleware:', token);
-
-  // Redirect to login page if no token
-  if (!token) {
-    return NextResponse.redirect(new URL('/api/auth/signin', request.url));
-  }
-
-  // Example redirection for '/'
-  if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL('/home', request.url));
-  }
-
-  return NextResponse.next();
+  console.log('middleware')
+  return NextResponse.redirect(new URL('/home', request.url))
 }
-
+ 
+// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/', '/dashbord', '/blogs'],
-};
+  matcher: '/blogs',
+}

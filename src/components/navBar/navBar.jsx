@@ -1,5 +1,5 @@
 "use client"
-import DashBordlayout from "@/app/(dashbord)/dashbord/layout";
+import DashBordlayout from "@/app/(dashbord)/dashboard/layout";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -32,7 +32,7 @@ const NavBar = () => {
     },
     {
       title: "Dashboard",
-      path: "dashbord"
+      path: "/dashboard"
     },
     {
       title: "Post",

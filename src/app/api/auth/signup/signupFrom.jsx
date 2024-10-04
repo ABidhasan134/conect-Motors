@@ -1,16 +1,32 @@
-'use Client'
+'use Client';
 import React from "react";
 
 const SignupFrom = () => {
-  const handelFromSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log(email, password);
+    const newUser = { email, password };
+    
+    console.log(newUser); // This will now log the new user correctly
+    
+    try {
+      const response = await fetch('http://localhost:3000/api/auth/new-user', {
+        method: 'POST',
+        body: JSON.stringify(newUser),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      
+      const result = await response.json();
+        console.log('User created:', result);
+    } catch (error) {
+      console.error('Error during user creation:', error);
+    }
   };
+
   return (
     <div>
-      <form className="card-body" onSubmit={()=>handelFromSubmit}>
+      <form className="card-body" onSubmit={handleFormSubmit}>
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -41,7 +57,7 @@ const SignupFrom = () => {
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Login</button>
+          <button className="btn btn-primary">Signup</button>
         </div>
       </form>
     </div>

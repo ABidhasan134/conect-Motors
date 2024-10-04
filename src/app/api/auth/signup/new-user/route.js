@@ -1,11 +1,13 @@
  
 import coneectDB from '@/lib/coneectDB'
-import React from 'react'
-export const POST = async() => {
+
+export const POST = async(request) => {
   try{
-    const db= await coneectDB(request);
+    const db= await coneectDB();
+
     const userCollections=db.collection('user')
     const newUser= await request.json();
+    console.log(newUser);
     const res= await userCollections.insertOne(newUser);
     return Response.json({massge:"new user added"})
   }
