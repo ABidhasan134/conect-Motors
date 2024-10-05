@@ -41,6 +41,10 @@ const NavBar = () => {
     {
       title: "mails",
       path: "/mails"
+    },
+    {
+      title: "Create user",
+      path: "/api/auth/signup"
     }
   ];
   const handelRedirect=()=>{

@@ -1,3 +1,4 @@
+import connectDB from "@/lib/coneectDB";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -20,8 +21,9 @@ export const authOptions={
 
         if (credentials.email) {
           // Find the user based on the email
-          const currentUser = users.find((user) => user.email === credentials.email);
-
+          // const currentUser = users.find((user) => user.email === credentials.email);
+          const db= await connectDB();
+          const currentUser=await db.collection('user').findOne({email: credentials.email});
           // Log the currentUser if found
           // console.log(credentials.email);
 
@@ -58,25 +60,25 @@ export const authOptions={
 }
 const handler = NextAuth(authOptions);
 
-const users = [
-  { id: 1,
-    email: "ab@c.com",
-    name: "james",
-    type: "admin",
-    image: "https://usatodayhss.com/wp-content/uploads/sites/96/2022/08/11268798.jpeg?w=1000&h=600&crop=1"
-  },
-  {
-    id: 2,
-    email: "ac@c.com",
-    name: "james",
-    type: "user"
-  },
-  {
-    id: 3,
-    email: "ac@c.com",
-    name: "james",
-    type: "user"
-  },
-];
+// const users = [
+//   { id: 1,
+//     email: "ab@c.com",
+//     name: "james",
+//     type: "admin",
+//     image: "https://usatodayhss.com/wp-content/uploads/sites/96/2022/08/11268798.jpeg?w=1000&h=600&crop=1"
+//   },
+//   {
+//     id: 2,
+//     email: "ac@c.com",
+//     name: "james",
+//     type: "user"
+//   },
+//   {
+//     id: 3,
+//     email: "ac@c.com",
+//     name: "james",
+//     type: "user"
+//   },
+// ];
 
 export { handler as GET, handler as POST };
