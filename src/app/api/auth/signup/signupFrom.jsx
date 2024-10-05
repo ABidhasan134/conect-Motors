@@ -11,7 +11,7 @@ const SignupFrom = () => {
     console.log(newUser); // This will now log the new user correctly
     
     try {
-      const response = await fetch('http://localhost:3000/api/auth/new-user', {
+      const response = await fetch('http://localhost:3000/api/auth/signup/new-user', {
         method: 'POST',
         body: JSON.stringify(newUser),
         headers: { 'Content-Type': 'application/json' }
