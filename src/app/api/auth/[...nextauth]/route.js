@@ -1,6 +1,7 @@
 import connectDB from "@/lib/coneectDB";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions={
   secret:process.env.NEXT_PUBLIC_AUTH_SECRET,
@@ -15,31 +16,23 @@ export const authOptions={
       },
       async authorize(credentials) {
         if (!credentials) {
-          // console.log("credentials is required")
           return null;
         }
 
         if (credentials.email) {
-          // Find the user based on the email
-          // const currentUser = users.find((user) => user.email === credentials.email);
           const db= await connectDB();
           const currentUser=await db.collection('user').findOne({email: credentials.email});
-          // Log the currentUser if found
-          // console.log(credentials.email);
-
-          if (currentUser) {
-            // If user is found, return user
-            // console.log(currentUser)
+          if (currentUser) {    
             return currentUser;
           }
         }
-
-        // If no user is found, return null
-        // console.log("not a valid user")
         return null;
       },
     }),
-    
+    GoogleProvider({
+      clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
+      clientSecret: process.env.NEXT_PUBLIC_CLIENT_SECRET
+    })
   ],
   callbacks: {
     async session({ session, user, token }) {
